@@ -19,6 +19,22 @@ const second: ProviderProfile = {
 };
 
 describe("proxy handler", () => {
+  test("returns standard healthz JSON without requiring providers", async () => {
+    const config = createDefaultConfig();
+
+    for (const path of ["/healthz", "/readyz"]) {
+      const response = await handleProxyRequest(config, new Request(`http://127.0.0.1:17890${path}`));
+      const body = await response.json() as { service: string; status: string };
+
+      expect(response.status).toBe(200);
+      expect(response.headers.get("Cache-Control")).toBe("no-store");
+      expect(body).toEqual({
+        service: "ai-agent-switch",
+        status: "ok",
+      });
+    }
+  });
+
   test("returns health JSON without requiring providers", async () => {
     const config = createDefaultConfig();
     const response = await handleProxyRequest(config, new Request("http://127.0.0.1:17890/health"));

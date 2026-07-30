@@ -262,7 +262,7 @@ bun run src/cli/main.ts proxy start --force
 In another shell:
 
 ```bash
-curl http://127.0.0.1:17890/health
+curl http://127.0.0.1:17890/healthz
 curl http://127.0.0.1:17890/v1/models
 ```
 

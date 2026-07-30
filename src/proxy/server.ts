@@ -20,6 +20,8 @@ export type ProxyRouteCandidate = {
   modelId: string;
 };
 
+const healthzServiceName = "ai-agent-switch";
+
 type ProxyDaemonSpawnOptions = {
   stdout: "ignore";
   stderr: "ignore";
@@ -177,6 +179,19 @@ export async function handleProxyRequest(
   fetcher: ProxyFetch = fetch as ProxyFetch,
 ): Promise<Response> {
   const url = new URL(request.url);
+  if (request.method === "GET" && (url.pathname === "/healthz" || url.pathname === "/readyz")) {
+    return Response.json(
+      {
+        service: healthzServiceName,
+        status: "ok",
+      },
+      {
+        headers: {
+          "Cache-Control": "no-store",
+        },
+      },
+    );
+  }
   if (request.method === "GET" && (url.pathname === "/health" || url.pathname === "/_health")) {
     return Response.json({
       ok: true,

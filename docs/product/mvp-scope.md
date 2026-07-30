@@ -29,7 +29,7 @@ It solves a common workflow problem: developers often use Codex, Gemini CLI, Qwe
 - `model list` shows all switchable model targets.
 - Proxy default route/fallback chain is supported.
 - The proxy rewrites OpenAI-compatible request body `model` values according to routes.
-- The proxy exposes `/health`.
+- The proxy exposes `/healthz`; `/health` remains available as a compatibility diagnostic endpoint.
 - The proxy exposes `/v1/models`.
 - `proxy start` respects `proxy.enabled`.
 - JSON output is available for automation.

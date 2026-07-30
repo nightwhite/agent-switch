@@ -359,7 +359,7 @@ ai-agent-switch proxy start
 健康检查：
 
 ```bash
-curl http://127.0.0.1:17890/health
+curl http://127.0.0.1:17890/healthz
 ```
 
 模型列表：
@@ -398,7 +398,8 @@ ai-agent-switch proxy start --force
 
 - OpenAI-compatible 请求转发。
 - 流式响应透传。
-- `/health` 健康检查。
+- `/healthz` 标准健康检查，响应包含 `Cache-Control: no-store`。
+- `/readyz`、`/health` 和 `/_health` 兼容健康检查入口。
 - `/v1/models` OpenAI-compatible 模型列表。
 - Bun fetch 的上游 `proxy` 选项。
 - 自动重试。

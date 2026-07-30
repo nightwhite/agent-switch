@@ -363,7 +363,7 @@ ai-agent-switch proxy start
 Health check:
 
 ```bash
-curl http://127.0.0.1:17890/health
+curl http://127.0.0.1:17890/healthz
 ```
 
 Model list:
@@ -408,7 +408,8 @@ The first proxy version supports:
 
 - OpenAI-compatible request forwarding.
 - Streaming response passthrough.
-- `/health` health checks.
+- `/healthz` standard health checks with `Cache-Control: no-store`.
+- `/readyz`, `/health`, and `/_health` compatibility health endpoints.
 - `/v1/models` OpenAI-compatible model lists.
 - Bun fetch upstream `proxy` option.
 - Automatic retries.

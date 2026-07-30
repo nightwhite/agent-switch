@@ -138,7 +138,7 @@ The first proxy version supports:
 - Direct routing when request body `model` is a valid `<provider>/<model>` value.
 - Streaming response passthrough.
 - Background process PID status.
-- `/health` endpoint.
+- `/healthz` standard health endpoint; `/health` remains available for compatibility diagnostics.
 - `/v1/models` OpenAI-compatible model list endpoint.
 - `proxy.enabled` start gate.
 
